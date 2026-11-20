@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BharatPulse | India Smooth Search</title>
+  <title>BharatPulse | India Smooth Search & Free Books</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
       --glass: rgba(255, 255, 255, 0.05);
       --border: rgba(255, 255, 255, 0.1);
       --saffron: #f97316;
+      --green: #22c55e;
       --text: #f9fafb;
       --muted: #9ca3af;
       --smooth: cubic-bezier(0.16, 1, 0.3, 1);
@@ -67,7 +68,7 @@
 
     .hero {
       text-align: center;
-      margin: 4vh 0 1.8rem;
+      margin: 4vh 0 1.6rem;
       transition: all 0.45s var(--smooth);
     }
 
@@ -84,6 +85,33 @@
       color: var(--muted);
       font-size: 0.92rem;
       margin-top: 0.4rem;
+    }
+
+    .mode-switch {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mode-btn {
+      background: var(--glass);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s var(--smooth);
+    }
+
+    .mode-btn.active {
+      background: rgba(249, 115, 22, 0.18);
+      border-color: var(--saffron);
+      color: #fed7aa;
     }
 
     .search-box {
@@ -196,16 +224,21 @@
   <div class="app" id="app">
     <div class="top-bar">
       <span class="india-tag">Bharat Edition • India</span>
-      <span>Direct Instant Search</span>
+      <span>Direct Instant Search + Free Books</span>
     </div>
 
     <header class="hero">
       <h1>BharatPulse</h1>
-      <p>Har query ke liye multiple web sources se instant search</p>
+      <p>Web aur Free Books ke liye multiple sources se instant search</p>
     </header>
 
+    <div class="mode-switch">
+      <button type="button" class="mode-btn active" id="modeAll">All Web & Books</button>
+      <button type="button" class="mode-btn" id="modeBooks">Free Books Only</button>
+    </div>
+
     <form class="search-box" id="searchForm">
-      <input type="text" id="queryInput" placeholder="Koi bhi jaankari ya topic likhein..." required autocomplete="off">
+      <input type="text" id="queryInput" placeholder="Book, author ya topic likhein..." required autocomplete="off">
       <button type="submit" class="go-btn">Search</button>
     </form>
 
@@ -217,18 +250,62 @@
     const searchForm = document.getElementById('searchForm');
     const queryInput = document.getElementById('queryInput');
     const resultsSection = document.getElementById('resultsSection');
+    const modeAllBtn = document.getElementById('modeAll');
+    const modeBooksBtn = document.getElementById('modeBooks');
+
+    let currentMode = "all";
+    let lastQuery = "";
+
+    modeAllBtn.addEventListener('click', () => {
+      currentMode = "all";
+      modeAllBtn.classList.add('active');
+      modeBooksBtn.classList.remove('active');
+      if (lastQuery) renderResults(lastQuery);
+    });
+
+    modeBooksBtn.addEventListener('click', () => {
+      currentMode = "books";
+      modeBooksBtn.classList.add('active');
+      modeAllBtn.classList.remove('active');
+      if (lastQuery) renderResults(lastQuery);
+    });
 
     searchForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const q = queryInput.value.trim();
       if (!q) return;
+      lastQuery = q;
       app.classList.add('compact');
-      renderMultiSiteResults(q);
+      renderResults(q);
     });
 
-    function renderMultiSiteResults(query) {
+    function renderResults(query) {
       const enc = encodeURIComponent(query);
-      const sources = [
+
+      const bookSources = [
+        {
+          name: "Project Gutenberg (Free eBooks)",
+          desc: `"${query}" se judi free public-domain books padhein ya download karein`,
+          url: `https://www.gutenberg.org/ebooks/search/?query=${enc}`
+        },
+        {
+          name: "Internet Archive Books",
+          desc: `"${query}" par free books, archives aur texts Internet Archive mein dekhein`,
+          url: `https://archive.org/search?query=${enc}&and[]=mediatype%3A%22texts%22`
+        },
+        {
+          name: "Open Library",
+          desc: `"${query}" ke liye Open Library catalog aur free reading options dekhein`,
+          url: `https://openlibrary.org/search?q=${enc}`
+        },
+        {
+          name: "Google Books (Free Preview & eBooks)",
+          desc: `"${query}" ki books aur free previews Google Books par khojein`,
+          url: `https://www.google.co.in/books?q=${enc}`
+        }
+      ];
+
+      const webSources = [
         {
           name: "Google India Search",
           desc: `"${query}" ke liye Google (.co.in) par web results dekhein`,
@@ -251,8 +328,12 @@
         }
       ];
 
+      const list = currentMode === "books"
+        ? bookSources
+        : [...bookSources.slice(0, 2), ...webSources];
+
       resultsSection.innerHTML = "";
-      sources.forEach((src) => {
+      list.forEach((src) => {
         const card = document.createElement("div");
         card.className = "card";
 
@@ -280,4 +361,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
