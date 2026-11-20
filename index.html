@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BharatPulse | India Smooth Search & Free Books</title>
+  <title>BharatPulse | India Smart Search, Books, Map & Services</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     :root {
       --bg: radial-gradient(circle at 50% -15%, #2b1d14 0%, #121218 58%, #09090d 100%);
       --glass: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.11);
       --saffron: #f97316;
       --green: #22c55e;
       --text: #f9fafb;
@@ -33,47 +33,43 @@
       color: var(--text);
       display: flex;
       justify-content: center;
-      padding: 2rem 1.2rem;
+      padding: 1.4rem 1rem 3rem;
     }
 
     .app {
       width: 100%;
-      max-width: 780px;
+      max-width: 820px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      transition: all 0.5s var(--smooth);
+      gap: 1rem;
     }
 
     .top-bar {
-      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      margin-bottom: 1.5rem;
       gap: 0.5rem;
       flex-wrap: wrap;
     }
 
     .india-tag {
-      padding: 0.25rem 0.7rem;
+      padding: 0.24rem 0.7rem;
       border-radius: 999px;
-      background: rgba(249, 115, 22, 0.14);
+      background: rgba(249, 115, 22, 0.15);
       border: 1px solid rgba(249, 115, 22, 0.35);
       color: #fdba74;
       font-weight: 600;
     }
 
-    .hero {
+    .brand-header {
       text-align: center;
-      margin: 4vh 0 1.6rem;
-      transition: all 0.45s var(--smooth);
+      padding: 0.4rem 0;
     }
 
-    .hero h1 {
-      font-size: 2.7rem;
+    .brand-header h1 {
+      font-size: 2.2rem;
       font-weight: 700;
       letter-spacing: -0.03em;
       background: linear-gradient(90deg, #fb923c, #ffffff, #4ade80);
@@ -81,284 +77,450 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p {
+    .brand-header p {
+      font-size: 0.86rem;
       color: var(--muted);
-      font-size: 0.92rem;
-      margin-top: 0.4rem;
+      margin-top: 0.25rem;
     }
 
-    .mode-switch {
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      backdrop-filter: blur(14px);
+    }
+
+    .panel-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fdba74;
+      margin-bottom: 0.55rem;
       display: flex;
-      gap: 0.5rem;
-      margin-bottom: 0.9rem;
-      width: 100%;
-      justify-content: center;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
       flex-wrap: wrap;
     }
 
-    .mode-btn {
-      background: var(--glass);
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0.45rem 1rem;
-      font-size: 0.84rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s var(--smooth);
-    }
-
-    .mode-btn.active {
-      background: rgba(249, 115, 22, 0.18);
-      border-color: var(--saffron);
-      color: #fed7aa;
-    }
-
-    .search-box {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--glass);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 0.75rem 1rem;
-      backdrop-filter: blur(18px);
-      transition: all 0.3s var(--smooth);
-    }
-
-    .search-box:focus-within {
-      border-color: var(--saffron);
-      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.18);
-    }
-
-    .search-box input {
+    .input-field {
       flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
+      min-width: 150px;
+      background: rgba(0, 0, 0, 0.32);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.65rem 0.85rem;
       color: var(--text);
-      font-size: 1rem;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.25s var(--smooth);
     }
 
-    .go-btn {
+    .input-field:focus {
+      border-color: var(--saffron);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .btn-saffron {
       background: linear-gradient(135deg, var(--saffron), #ea580c);
       color: #fff;
       border: none;
-      border-radius: 12px;
-      padding: 0.6rem 1.15rem;
+      border-radius: 11px;
+      padding: 0.62rem 1rem;
+      font-size: 0.84rem;
       font-weight: 600;
       cursor: pointer;
-      transition: transform 0.2s var(--smooth);
+      white-space: nowrap;
     }
 
-    .go-btn:hover {
-      transform: translateY(-1px);
+    .btn-dark {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 0.58rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
     }
 
-    .results {
-      width: 100%;
-      margin-top: 1.5rem;
+    .btn-dark:hover, .btn-saffron:hover {
+      opacity: 0.92;
+    }
+
+    .results-wrap {
       display: none;
       flex-direction: column;
-      gap: 0.9rem;
+      gap: 0.75rem;
     }
 
-    .results.show {
+    .results-wrap.show {
       display: flex;
     }
 
     .card {
       background: var(--glass);
       border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 1.1rem 1.25rem;
+      border-radius: 14px;
+      padding: 0.9rem 1.05rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
-      transition: transform 0.2s var(--smooth), border-color 0.2s ease;
+      gap: 0.8rem;
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(249, 115, 22, 0.45);
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.16rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.14);
+      color: #86efac;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      display: inline-block;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
     }
 
     .card h3 {
-      font-size: 1rem;
-      color: #fdba74;
-      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+      color: #fed7aa;
+      margin-bottom: 0.15rem;
     }
 
     .card p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--muted);
     }
 
-    .open-link {
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text);
-      padding: 0.5rem 0.85rem;
+    .map-frame-box {
+      margin-top: 0.65rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .map-frame-box iframe {
+      width: 100%;
+      height: 220px;
+      border: 0;
+      display: block;
+    }
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .review-item {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
       border-radius: 10px;
+      padding: 0.6rem 0.8rem;
       font-size: 0.82rem;
-      font-weight: 600;
-      white-space: nowrap;
     }
 
-    .compact .hero {
-      margin: 0.5rem 0 1rem;
+    .review-item strong {
+      color: #fdba74;
     }
 
-    .compact .hero h1 {
-      font-size: 1.8rem;
-    }
-
-    .compact .hero p {
-      display: none;
+    .review-item span {
+      color: var(--muted);
+      display: block;
+      margin-top: 0.15rem;
     }
   </style>
 </head>
 <body>
-  <div class="app" id="app">
+  <div class="app">
     <div class="top-bar">
       <span class="india-tag">Bharat Edition • India</span>
-      <span>Direct Instant Search + Free Books</span>
+      <span>Fast • Clean • No Clutter</span>
     </div>
 
-    <header class="hero">
+    <header class="brand-header">
       <h1>BharatPulse</h1>
-      <p>Web aur Free Books ke liye multiple sources se instant search</p>
+      <p>Books, PDFs, News, Food Delivery, Weather, Sports aur India Route — sab ek jagah</p>
     </header>
 
-    <div class="mode-switch">
-      <button type="button" class="mode-btn active" id="modeAll">All Web & Books</button>
-      <button type="button" class="mode-btn" id="modeBooks">Free Books Only</button>
-    </div>
-
-    <form class="search-box" id="searchForm">
-      <input type="text" id="queryInput" placeholder="Book, author ya topic likhein..." required autocomplete="off">
-      <button type="submit" class="go-btn">Search</button>
+    <!-- 1. MAIN SEARCH BOX -->
+    <form class="panel" id="mainSearchForm">
+      <div class="panel-label">
+        <span>Main Search (Books, PDF, News, Food, Weather, Sports)</span>
+      </div>
+      <div class="search-row">
+        <input type="text" class="input-field" id="mainQuery" placeholder="Kuch bhi likhein: jaise book, weather, cricket, news, biryani..." required autocomplete="off">
+        <button type="submit" class="btn-saffron">Search</button>
+      </div>
     </form>
 
-    <section class="results" id="resultsSection"></section>
+    <!-- 2. COMPACT BOOKS & PDF BOX + INDIA MAP ROUTE BOX -->
+    <div class="mini-grid">
+      <!-- Chhota Books & PDF Box -->
+      <form class="panel" id="bookSearchForm">
+        <div class="panel-label">
+          <span>Books & PDF Box</span>
+        </div>
+        <div class="search-row">
+          <input type="text" class="input-field" id="bookQuery" placeholder="Book ya PDF topic likhein..." required autocomplete="off">
+          <button type="submit" class="btn-dark">Find</button>
+        </div>
+      </form>
+
+      <!-- India Map & Clear Route Box -->
+      <form class="panel" id="routeForm">
+        <div class="panel-label">
+          <span>India Map & Clear Route</span>
+        </div>
+        <div class="search-row">
+          <input type="text" class="input-field" id="fromCity" placeholder="From (jaise Lucknow)" autocomplete="off">
+          <input type="text" class="input-field" id="toCity" placeholder="To (jaise Varanasi)" autocomplete="off">
+          <button type="submit" class="btn-dark">Route</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Live India Map Preview -->
+    <div class="panel" id="mapPanel">
+      <div class="panel-label">
+        <span id="mapTitle">India Map View</span>
+        <a id="externalRouteLink" class="btn-dark" href="https://www.google.com/maps/dir/?api=1&origin=Lucknow&destination=Varanasi&travelmode=driving" target="_blank" rel="noopener noreferrer">Full Map / Route</a>
+      </div>
+      <div class="map-frame-box">
+        <iframe id="indiaMapFrame" src="https://www.openstreetmap.org/export/embed.html?bbox=68.1%2C7.9%2C97.4%2C35.5&amp;layer=mapnik" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- Main Search & Utility Results -->
+    <section class="results-wrap" id="resultsSection"></section>
+
+    <!-- User Review Box -->
+    <div class="panel">
+      <div class="panel-label">
+        <span>Apna Review Dein</span>
+      </div>
+      <form class="search-row" id="reviewForm">
+        <input type="text" class="input-field" id="reviewerName" placeholder="Aapka naam" required autocomplete="off">
+        <input type="text" class="input-field" id="reviewerText" placeholder="Apna review likhein..." required autocomplete="off">
+        <button type="submit" class="btn-saffron">Post Review</button>
+      </form>
+      <div class="review-list" id="reviewList"></div>
+    </div>
   </div>
 
   <script>
-    const app = document.getElementById('app');
-    const searchForm = document.getElementById('searchForm');
-    const queryInput = document.getElementById('queryInput');
+    const mainSearchForm = document.getElementById('mainSearchForm');
+    const mainQuery = document.getElementById('mainQuery');
+    const bookSearchForm = document.getElementById('bookSearchForm');
+    const bookQuery = document.getElementById('bookQuery');
+    const routeForm = document.getElementById('routeForm');
+    const fromCity = document.getElementById('fromCity');
+    const toCity = document.getElementById('toCity');
+    const mapTitle = document.getElementById('mapTitle');
+    const externalRouteLink = document.getElementById('externalRouteLink');
+    const indiaMapFrame = document.getElementById('indiaMapFrame');
     const resultsSection = document.getElementById('resultsSection');
-    const modeAllBtn = document.getElementById('modeAll');
-    const modeBooksBtn = document.getElementById('modeBooks');
 
-    let currentMode = "all";
-    let lastQuery = "";
+    const reviewForm = document.getElementById('reviewForm');
+    const reviewerName = document.getElementById('reviewerName');
+    const reviewerText = document.getElementById('reviewerText');
+    const reviewList = document.getElementById('reviewList');
 
-    modeAllBtn.addEventListener('click', () => {
-      currentMode = "all";
-      modeAllBtn.classList.add('active');
-      modeBooksBtn.classList.remove('active');
-      if (lastQuery) renderResults(lastQuery);
-    });
+    function createResultCard(tag, title, desc, url, btnText = "Open") {
+      const card = document.createElement('div');
+      card.className = 'card';
 
-    modeBooksBtn.addEventListener('click', () => {
-      currentMode = "books";
-      modeBooksBtn.classList.add('active');
-      modeAllBtn.classList.remove('active');
-      if (lastQuery) renderResults(lastQuery);
-    });
+      const info = document.createElement('div');
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = tag;
 
-    searchForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const q = queryInput.value.trim();
-      if (!q) return;
-      lastQuery = q;
-      app.classList.add('compact');
-      renderResults(q);
-    });
+      const h3 = document.createElement('h3');
+      h3.textContent = title;
 
-    function renderResults(query) {
+      const p = document.createElement('p');
+      p.textContent = desc;
+
+      info.appendChild(badge);
+      info.appendChild(h3);
+      info.appendChild(p);
+
+      const link = document.createElement('a');
+      link.className = 'btn-dark';
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = btnText;
+
+      card.appendChild(info);
+      card.appendChild(link);
+      return card;
+    }
+
+    function renderBookCards(query, container) {
       const enc = encodeURIComponent(query);
-
-      const bookSources = [
+      const bookItems = [
         {
-          name: "Project Gutenberg (Free eBooks)",
-          desc: `"${query}" se judi free public-domain books padhein ya download karein`,
-          url: `https://www.gutenberg.org/ebooks/search/?query=${enc}`
-        },
-        {
-          name: "Internet Archive Books",
-          desc: `"${query}" par free books, archives aur texts Internet Archive mein dekhein`,
+          tag: "Books & PDF",
+          title: "Internet Archive (Free Books & PDFs)",
+          desc: `"${query}" se judi free books, scanned copies aur PDF documents dekhein`,
           url: `https://archive.org/search?query=${enc}&and[]=mediatype%3A%22texts%22`
         },
         {
-          name: "Open Library",
-          desc: `"${query}" ke liye Open Library catalog aur free reading options dekhein`,
+          tag: "Books & PDF",
+          title: "Project Gutenberg (Free eBooks)",
+          desc: `"${query}" ke liye free reading books aur formats khojein`,
+          url: `https://www.gutenberg.org/ebooks/search/?query=${enc}`
+        },
+        {
+          tag: "Books & PDF",
+          title: "Open Library",
+          desc: `"${query}" ki books aur free borrow/read options dekhein`,
           url: `https://openlibrary.org/search?q=${enc}`
         },
         {
-          name: "Google Books (Free Preview & eBooks)",
-          desc: `"${query}" ki books aur free previews Google Books par khojein`,
-          url: `https://www.google.co.in/books?q=${enc}`
+          tag: "Books & PDF",
+          title: "Google Books & PDF Search",
+          desc: `"${query}" se judi books aur PDF resources par seedha jaayein`,
+          url: `https://www.google.co.in/search?q=${enc}+filetype%3Apdf+OR+site%3Abooks.google.co.in`
         }
       ];
 
-      const webSources = [
-        {
-          name: "Google India Search",
-          desc: `"${query}" ke liye Google (.co.in) par web results dekhein`,
-          url: `https://www.google.co.in/search?q=${enc}`
-        },
-        {
-          name: "DuckDuckGo Search",
-          desc: `"${query}" ke liye DuckDuckGo par general web results dekhein`,
-          url: `https://duckduckgo.com/?q=${enc}`
-        },
-        {
-          name: "Bing Search",
-          desc: `"${query}" ke liye Bing par pages aur links dekhein`,
-          url: `https://www.bing.com/search?q=${enc}`
-        },
-        {
-          name: "Wikipedia Encyclopedia",
-          desc: `"${query}" se judi jaankari aur definitions Wikipedia par dekhein`,
-          url: `https://en.wikipedia.org/wiki/Special:Search?search=${enc}`
-        }
-      ];
+      bookItems.forEach((item) => {
+        container.appendChild(createResultCard(item.tag, item.title, item.desc, item.url, "Open"));
+      });
+    }
 
-      const list = currentMode === "books"
-        ? bookSources
-        : [...bookSources.slice(0, 2), ...webSources];
+    mainSearchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = mainQuery.value.trim();
+      if (!q) return;
+      const enc = encodeURIComponent(q);
 
       resultsSection.innerHTML = "";
-      list.forEach((src) => {
-        const card = document.createElement("div");
-        card.className = "card";
+      renderBookCards(q, resultsSection);
 
-        const info = document.createElement("div");
-        const h3 = document.createElement("h3");
-        h3.textContent = src.name;
-        const p = document.createElement("p");
-        p.textContent = src.desc;
-        info.appendChild(h3);
-        info.appendChild(p);
+      const mainHubs = [
+        {
+          tag: "News",
+          title: "India News & Live Updates",
+          desc: `"${q}" par taaza khabrein aur news headlines dekhein`,
+          url: `https://news.google.com/search?q=${enc}&hl=hi-IN&gl=IN&ceid=IN:hi`
+        },
+        {
+          tag: "Food Delivery",
+          title: "Food Delivery (Zomato / Swiggy / Search)",
+          desc: `"${q}" ya nearby food delivery options turant dekhein`,
+          url: `https://www.google.co.in/search?q=${enc}+food+delivery+near+me`
+        },
+        {
+          tag: "Weather",
+          title: "Live Weather Forecast",
+          desc: `"${q}" ka aaj ka mausam, temperature aur forecast dekhein`,
+          url: `https://www.google.co.in/search?q=${enc}+weather`
+        },
+        {
+          tag: "Sports",
+          title: "Live Sports & Scores",
+          desc: `"${q}" ke live scores, match updates aur sports news dekhein`,
+          url: `https://www.google.co.in/search?q=${enc}+live+score+sports`
+        },
+        {
+          tag: "Web Search",
+          title: "Google India Main Search",
+          desc: `"${q}" ke liye sabse main aur relevant results dekhein`,
+          url: `https://www.google.co.in/search?q=${enc}`
+        }
+      ];
 
-        const link = document.createElement("a");
-        link.className = "open-link";
-        link.href = src.url;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        link.textContent = "Open";
-
-        card.appendChild(info);
-        card.appendChild(link);
-        resultsSection.appendChild(card);
+      mainHubs.forEach((item) => {
+        resultsSection.appendChild(createResultCard(item.tag, item.title, item.desc, item.url, "Open"));
       });
 
-      resultsSection.classList.add("show");
+      resultsSection.classList.add('show');
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    bookSearchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const bq = bookQuery.value.trim();
+      if (!bq) return;
+
+      resultsSection.innerHTML = "";
+      renderBookCards(bq, resultsSection);
+      resultsSection.classList.add('show');
+      resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    routeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const origin = fromCity.value.trim() || "India";
+      const destination = toCity.value.trim() || "India";
+
+      mapTitle.textContent = `Route: ${origin} → ${destination}`;
+      externalRouteLink.href = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=driving`;
+
+      // India central view on embedded map + clear external turn-by-turn route
+      indiaMapFrame.src = "https://www.openstreetmap.org/export/embed.html?bbox=68.1%2C7.9%2C97.4%2C35.5&amp;layer=mapnik";
+      window.open(externalRouteLink.href, "_blank", "noopener,noreferrer");
+    });
+
+    const savedReviews = JSON.parse(localStorage.getItem("bp_reviews") || "[]");
+
+    function renderReviews() {
+      reviewList.innerHTML = "";
+      if (savedReviews.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'review-item';
+        empty.innerHTML = `<strong>BharatPulse</strong><span>Sabse pehla review aap likh sakte hain.</span>`;
+        reviewList.appendChild(empty);
+        return;
+      }
+
+      savedReviews.slice().reverse().forEach((rev) => {
+        const div = document.createElement('div');
+        div.className = 'review-item';
+        const strong = document.createElement('strong');
+        strong.textContent = rev.name;
+        const span = document.createElement('span');
+        span.textContent = rev.text;
+        div.appendChild(strong);
+        div.appendChild(span);
+        reviewList.appendChild(div);
+      });
     }
+
+    reviewForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = reviewerName.value.trim();
+      const text = reviewerText.value.trim();
+      if (!name || !text) return;
+
+      savedReviews.push({ name, text });
+      localStorage.setItem("bp_reviews", JSON.stringify(savedReviews));
+      reviewerName.value = "";
+      reviewerText.value = "";
+      renderReviews();
+    });
+
+    renderReviews();
   </script>
 </body>
   </html>
