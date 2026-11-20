@@ -1,741 +1,286 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Krishna Sudama Group of Institutions | Kaithi, Varanasi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyPulse - Offline Smart Study App</title>
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="manifest.json" />
   <style>
-    :root {
-      --bg: #0b0f17;
-      --surface: #121826;
-      --surface-2: #182134;
-      --border: rgba(255, 255, 255, 0.1);
-      --saffron: #f97316;
-      --gold: #fbbf24;
-      --green: #22c55e;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    /* Top Announcement Bar */
-    .top-strip {
-      background: linear-gradient(90deg, #ea580c, #d97706, #16a34a);
-      color: #ffffff;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.45rem 1rem;
-      text-align: center;
-    }
-
-    /* Navbar */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(11, 15, 23, 0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0.85rem 1.2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-    }
-
-    .brand-badge {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--saffron), var(--gold));
-      color: #090d16;
-      font-weight: 800;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .brand-title {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .brand-sub {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    nav {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.86rem;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-
-    nav a:hover {
-      color: #fdba74;
-    }
-
-    .cta-pill {
-      background: var(--saffron);
-      color: #fff !important;
-      padding: 0.48rem 0.95rem;
-      border-radius: 999px;
-    }
-
-    /* Hero Section */
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 1.2rem;
-    }
-
-    .hero {
-      padding: 2.6rem 0 2rem;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 1.6rem;
-      align-items: center;
-    }
-
-    .tag {
-      display: inline-block;
-      background: rgba(249, 115, 22, 0.14);
-      border: 1px solid rgba(249, 115, 22, 0.35);
-      color: #fdba74;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.28rem 0.75rem;
-      border-radius: 999px;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero h1 {
-      font-size: 2.35rem;
-      line-height: 1.18;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, #fb923c, #fde047, #4ade80);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: var(--muted);
-      margin-top: 0.8rem;
-      font-size: 0.96rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 0.75rem;
-      margin-top: 1.35rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--saffron), #ea580c);
-      color: #fff;
-      border: none;
-      padding: 0.72rem 1.25rem;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn-outline {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 0.72rem 1.2rem;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .campus-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .campus-photo-wrap {
-      position: relative;
-      width: 100%;
-      height: 265px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .campus-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .photo-fallback {
-      text-align: center;
-      padding: 1.5rem;
-      display: none;
-    }
-
-    .photo-fallback.show {
-      display: block;
-    }
-
-    .photo-fallback h3 {
-      color: #fdba74;
-      font-size: 1.05rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .photo-fallback p {
-      color: var(--muted);
-      font-size: 0.82rem;
-    }
-
-    .campus-caption {
-      padding: 0.9rem 1.1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.6rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.84rem;
-    }
-
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin: 1.4rem 0 2.6rem;
-    }
-
-    .stat-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.1rem;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: #fdba74;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
-    }
-
-    /* Sections */
-    section {
-      padding: 2.2rem 0;
-    }
-
-    .sec-head {
-      margin-bottom: 1.3rem;
-    }
-
-    .sec-head h2 {
-      font-size: 1.65rem;
-      font-weight: 700;
-    }
-
-    .sec-head p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 0.25rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 1.25rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(249, 115, 22, 0.45);
-    }
-
-    .card-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.2rem 0.65rem;
-      border-radius: 999px;
-      background: rgba(34, 197, 94, 0.14);
-      color: #86efac;
-      margin-bottom: 0.65rem;
-    }
-
-    .card h3 {
-      font-size: 1.12rem;
-      margin-bottom: 0.4rem;
-      color: #fed7aa;
-    }
-
-    .card p {
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .card ul {
-      margin-top: 0.7rem;
-      padding-left: 1.1rem;
-      font-size: 0.85rem;
-      color: #cbd5e1;
-    }
-
-    .card li {
-      margin-bottom: 0.28rem;
-    }
-
-    /* Chairman Spotlight */
-    .chairman-box {
-      background: linear-gradient(135deg, rgba(249, 115, 22, 0.12), rgba(18, 24, 38, 0.95));
-      border: 1px solid rgba(249, 115, 22, 0.35);
-      border-radius: 20px;
-      padding: 1.5rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1.3rem;
-      align-items: center;
-    }
-
-    .avatar {
-      width: 78px;
-      height: 78px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, var(--saffron), var(--gold));
-      color: #090d16;
-      font-weight: 800;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .chairman-role {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #fdba74;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .chairman-box h3 {
-      font-size: 1.35rem;
-      margin-top: 0.15rem;
-    }
-
-    .chairman-box blockquote {
-      margin-top: 0.65rem;
-      color: #e2e8f0;
-      font-style: italic;
-      font-size: 0.92rem;
-      border-left: 3px solid var(--saffron);
-      padding-left: 0.85rem;
-    }
-
-    /* Notice + Admission Form */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-
-    .notice-item {
-      padding: 0.8rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .notice-item:last-child {
-      border-bottom: none;
-    }
-
-    .notice-item strong {
-      display: block;
-      font-size: 0.9rem;
-      color: #fed7aa;
-    }
-
-    .notice-item span {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .form-group {
-      margin-bottom: 0.8rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      margin-bottom: 0.3rem;
-      font-weight: 600;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 0.65rem 0.8rem;
-      color: var(--text);
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--saffron);
-    }
-
-    .status-msg {
-      margin-top: 0.7rem;
-      font-size: 0.86rem;
-      color: #86efac;
-      min-height: 1.2rem;
-    }
-
-    footer {
-      margin-top: 2.5rem;
-      border-top: 1px solid var(--border);
-      padding: 1.6rem 1.2rem 2.4rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    @media (max-width: 820px) {
-      .hero,
-      .two-col,
-      .chairman-box {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 1.85rem;
-      }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background: #0f172a; color: #f8fafc; min-height: 100vh; padding: 16px; }
+    .container { max-width: 600px; margin: 0 auto; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    h1 { font-size: 1.4rem; color: #38bdf8; }
+    .status { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; background: #1e293b; color: #4ade80; }
+    .status.offline { color: #facc15; }
+
+    .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .tab-btn { flex: 1; padding: 10px; border: none; border-radius: 10px; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; }
+    .tab-btn.active { background: #38bdf8; color: #0f172a; }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .card-box { background: #1e293b; padding: 16px; border-radius: 14px; margin-bottom: 14px; }
+    input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #334155; border-radius: 10px; background: #0f172a; color: #fff; font-size: 0.95rem; }
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #38bdf8; color: #0f172a; font-weight: 700; cursor: pointer; font-size: 0.95rem; }
+    .btn-secondary { background: #334155; color: #f8fafc; margin-top: 8px; }
+
+    .note-item { background: #0f172a; padding: 12px; border-radius: 10px; margin-top: 10px; border-left: 4px solid #38bdf8; display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+    .note-item strong { color: #38bdf8; display: block; margin-bottom: 4px; }
+    .del-btn { background: #ef4444; color: #fff; border: none; padding: 5px 9px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+
+    /* Flashcard */
+    .flashcard { background: #1e293b; min-height: 200px; border-radius: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 24px; cursor: pointer; border: 2px solid #38bdf8; transition: transform 0.2s; }
+    .flashcard:active { transform: scale(0.98); }
+    .fc-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 10px; }
+    .fc-text { font-size: 1.25rem; font-weight: 600; line-height: 1.5; }
+    .fc-controls { display: flex; gap: 10px; margin-top: 14px; }
+
+    /* Quiz */
+    .quiz-q { font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; color: #38bdf8; }
+    .opt-btn { width: 100%; text-align: left; padding: 12px; margin-bottom: 8px; border: 1px solid #334155; border-radius: 10px; background: #0f172a; color: #f8fafc; cursor: pointer; font-size: 0.95rem; }
+    .opt-btn.correct { background: #166534; border-color: #4ade80; }
+    .opt-btn.wrong { background: #7f1d1d; border-color: #f87171; }
+    .score-bar { text-align: center; font-weight: 700; margin-bottom: 12px; color: #facc15; }
   </style>
 </head>
 <body>
-  <div class="top-strip">
-    Krishna Sudama Group of Institutions • Kaithi, Varanasi | Admissions & Academic Portal
+  <div class="container">
+    <header>
+      <h1>⚡ StudyPulse</h1>
+      <span id="netStatus" class="status">Online</span>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('notes', this)">📝 Notes</button>
+      <button class="tab-btn" onclick="switchTab('cards', this)">🃏 Flashcards</button>
+      <button class="tab-btn" onclick="switchTab('quiz', this)">🎯 Quiz</button>
+    </div>
+
+    <!-- NOTES SECTION -->
+    <div id="notes" class="section active">
+      <div class="card-box">
+        <input type="text" id="topicInput" placeholder="Topic / Question (e.g., Article 21)" />
+        <textarea id="answerInput" rows="3" placeholder="Short Answer / Definition..."></textarea>
+        <button class="btn" onclick="addNote()">+ Save Note Offline</button>
+      </div>
+      <div class="card-box">
+        <h3 style="margin-bottom:8px; font-size:1rem;">Saved Notes (<span id="noteCount">0</span>)</h3>
+        <div id="notesList"></div>
+      </div>
+    </div>
+
+    <!-- FLASHCARDS SECTION -->
+    <div id="cards" class="section">
+      <div class="flashcard" onclick="flipCard()">
+        <div class="fc-label" id="fcLabel">Question (Tap to Flip)</div>
+        <div class="fc-text" id="fcText">Add notes first!</div>
+      </div>
+      <div class="fc-controls">
+        <button class="btn btn-secondary" onclick="prevCard()">⬅ Prev</button>
+        <button class="btn" onclick="nextCard()">Next ➡</button>
+      </div>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div id="quiz" class="section">
+      <div class="card-box">
+        <div class="score-bar" id="scoreBar">Score: 0</div>
+        <div class="quiz-q" id="quizQuestion">Need at least 2 notes for Quiz!</div>
+        <div id="quizOptions"></div>
+        <button class="btn btn-secondary" onclick="loadQuiz()">Next Question ➡</button>
+      </div>
+    </div>
   </div>
 
-  <header>
-    <div class="nav-wrap">
-      <div class="brand">
-        <div class="brand-badge">KS</div>
-        <div>
-          <div class="brand-title">Krishna Sudama Group of Institutions</div>
-          <div class="brand-sub">Kaithi, Varanasi, Uttar Pradesh</div>
-        </div>
-      </div>
-
-      <nav>
-        <a href="#courses">Courses</a>
-        <a href="#chairman">Chairman</a>
-        <a href="#facilities">Facilities</a>
-        <a href="#admission" class="cta-pill">Admission Enquiry</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <!-- Hero -->
-    <section class="hero">
-      <div>
-        <span class="tag">Kaithi, Varanasi Campus</span>
-        <h1>Shiksha, Sanskar aur Career ki Nayi Udaan — <span>Krishna Sudama Group of Institutions</span></h1>
-        <p>
-          Kaithi, Varanasi mein sthit Krishna Sudama Group of Institutions mein undergraduate aur postgraduate
-          programs ke saath disciplined campus environment, computer labs, library aur student support uplabdh hai.
-        </p>
-        <div class="hero-actions">
-          <a href="#courses" class="btn-primary">Courses Dekhein</a>
-          <a href="#admission" class="btn-outline">Admission Form</a>
-        </div>
-      </div>
-
-      <div class="campus-card">
-        <div class="campus-photo-wrap">
-          <!-- Yahan Google Image Search se li gayi direct image URL daalein (jaise https://.../college-photo.jpg) -->
-          <img
-            id="collegeImg"
-            src=""
-            alt="Krishna Sudama Group of Institutions Kaithi Varanasi"
-            onload="handleImgLoad()"
-            onerror="handleImgError()"
-          >
-          <div class="photo-fallback show" id="photoFallback">
-            <h3>Krishna Sudama Group of Institutions</h3>
-            <p>Kaithi, Varanasi • Campus Showcase</p>
-            <p style="margin-top:0.5rem; font-size:0.75rem; color:#fdba74;">
-              Tip: Code mein <code>id="collegeImg"</code> ke <code>src=""</code> mein Google se direct image link paste karein.
-            </p>
-          </div>
-        </div>
-        <div class="campus-caption">
-          <span><strong>Campus:</strong> Kaithi, Varanasi</span>
-          <span style="color:#86efac; font-weight:600;">BCA • MA • BA</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Highlights -->
-    <div class="stats">
-      <div class="stat-box">
-        <div class="stat-num">BCA • MA • BA</div>
-        <div class="stat-label">Core Degree Programs</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">Kaithi</div>
-        <div class="stat-label">Varanasi Campus</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">Labs & Library</div>
-        <div class="stat-label">Practical & Study Support</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">Mentorship</div>
-        <div class="stat-label">Academic & Career Guidance</div>
-      </div>
-    </div>
-
-    <!-- Courses Section -->
-    <section id="courses">
-      <div class="sec-head">
-        <h2>Academic Programs & Courses</h2>
-        <p>Students ke career aur higher studies ke liye pramukh courses</p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <span class="card-badge">Computer & IT</span>
-          <h3>BCA (Bachelor of Computer Applications)</h3>
-          <p>Software development, programming, databases aur modern IT skills ke liye practical degree program.</p>
-          <ul>
-            <li>Programming & Algorithms foundation</li>
-            <li>Web & Database concepts</li>
-            <li>IT & Tech career preparation</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <span class="card-badge">Postgraduate</span>
-          <h3>MA (Master of Arts)</h3>
-          <p>Arts aur humanities subjects mein gahri samajh, research aur academic excellence ke liye PG program.</p>
-          <ul>
-            <li>Subject specialization & seminars</li>
-            <li>Analytical & writing skills</li>
-            <li>Higher education & exam readiness</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <span class="card-badge">Undergraduate</span>
-          <h3>BA (Bachelor of Arts)</h3>
-          <p>Social sciences, humanities aur competitive exam tayari ke saath strong foundation course.</p>
-          <ul>
-            <li>Core subjects & multidisciplinary study</li>
-            <li>Communication & critical thinking</li>
-            <li>PG aur civil/govt exam base</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Chairman Section -->
-    <section id="chairman">
-      <div class="sec-head">
-        <h2>Leadership & Vision</h2>
-        <p>Sansthan ko margdarshan dene wale netritva ka sandesh</p>
-      </div>
-
-      <div class="chairman-box">
-        <div class="avatar">VY</div>
-        <div>
-          <div class="chairman-role">Chairman • Krishna Sudama Group of Institutions</div>
-          <h3>Dr. Vijay Yadav Sir</h3>
-          <p style="color:#cbd5e1; font-size:0.9rem; margin-top:0.35rem;">
-            Dr. Vijay Yadav Sir ke netritva mein Kaithi, Varanasi ke is campus ka uddeshya rural aur urban
-            students ko gunvattapurna shiksha, anushasan aur aage badhne ke avsar pradan karna hai.
-          </p>
-          <blockquote>
-            "Sahi margdarshan, mehnat aur sanskar har vidyarthi ko uske lakshya tak pahuncha sakte hain."
-          </blockquote>
-        </div>
-      </div>
-    </section>
-
-    <!-- College Facilities -->
-    <section id="facilities">
-      <div class="sec-head">
-        <h2>Campus Facilities & Student Life</h2>
-        <p>Ek complete college mein zaroori sabhi suvidhayein aur academic mahaul</p>
-      </div>
-
-      <div class="grid-3">
-        <div class="card">
-          <span class="card-badge">Practical Learning</span>
-          <h3>Computer & Science Labs</h3>
-          <p>BCA aur practical coursework ke liye dedicated systems, lab sessions aur guided practice.</p>
-        </div>
-
-        <div class="card">
-          <span class="card-badge">Reading & Reference</span>
-          <h3>Central Library & Study Space</h3>
-          <p>Textbooks, reference material, newspapers aur quiet self-study ke liye supportive environment.</p>
-        </div>
-
-        <div class="card">
-          <span class="card-badge">Student Growth</span>
-          <h3>Faculty Guidance, Events & Support</h3>
-          <p>Regular classes, exam guidance, cultural/academic activities aur scholarship/form sahayata.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Notices + Admission Enquiry -->
-    <section id="admission">
-      <div class="sec-head">
-        <h2>Updates & Admission Desk</h2>
-        <p>Latest notices dekhein ya admission/course jaankari ke liye enquiry bhejein</p>
-      </div>
-
-      <div class="two-col">
-        <div class="card">
-          <span class="card-badge">Notice Board</span>
-          <h3>Academic & Campus Updates</h3>
-          <div class="notice-item">
-            <strong>BCA, BA & MA Admission Desk</strong>
-            <span>Courses, eligibility aur documents ki jaankari ke liye enquiry form bharein.</span>
-          </div>
-          <div class="notice-item">
-            <strong>Classes, Practicals & Attendance</strong>
-            <span>Regular classroom lectures, lab schedules aur internal assessment updates.</span>
-          </div>
-          <div class="notice-item">
-            <strong>Campus Location — Kaithi, Varanasi</strong>
-            <span>Varanasi ke Kaithi kshetra mein accessible aur shant shaikshik parisar.</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <span class="card-badge">Enquiry Form</span>
-          <h3>Admission / Course Enquiry</h3>
-          <form id="enquiryForm">
-            <div class="form-group">
-              <label for="stuName">Student Name</label>
-              <input type="text" id="stuName" placeholder="Apna poora naam likhein" required>
-            </div>
-            <div class="form-group">
-              <label for="stuPhone">Mobile Number</label>
-              <input type="tel" id="stuPhone" placeholder="10-digit mobile number" required>
-            </div>
-            <div class="form-group">
-              <label for="stuCourse">Select Course</label>
-              <select id="stuCourse">
-                <option value="BCA">BCA (Bachelor of Computer Applications)</option>
-                <option value="BA">BA (Bachelor of Arts)</option>
-                <option value="MA">MA (Master of Arts)</option>
-                <option value="Other">Other Course / General Enquiry</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="stuMsg">Message / Query</label>
-              <textarea id="stuMsg" rows="2" placeholder="Aapko kis baare mein jaankari chahiye?"></textarea>
-            </div>
-            <button type="submit" class="btn-primary">Submit Enquiry</button>
-            <div class="status-msg" id="enquiryStatus"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <strong>Krishna Sudama Group of Institutions</strong> • Kaithi, Varanasi<br>
-    Chairman: Dr. Vijay Yadav Sir • Programs: BCA, MA, BA & More
-  </footer>
-
   <script>
-    const collegeImg = document.getElementById('collegeImg');
-    const photoFallback = document.getElementById('photoFallback');
+    // Default sample notes on first visit
+    const defaultNotes = [
+      { q: "HTTP Full Form", a: "HyperText Transfer Protocol" },
+      { q: "Father of C Language", a: "Dennis Ritchie" },
+      { q: "Article 21 of Indian Constitution", a: "Protection of Life and Personal Liberty" },
+      { q: "RAM vs ROM", a: "RAM is volatile temporary memory; ROM is permanent memory." }
+    ];
 
-    function handleImgLoad() {
-      if (collegeImg.src && collegeImg.src.trim() !== "" && collegeImg.src !== window.location.hr
+    let notes = JSON.parse(localStorage.getItem("studypulse_notes")) || defaultNotes;
+    let cardIndex = 0;
+    let isFlipped = false;
+    let score = 0;
+
+    function saveToStorage() {
+      localStorage.setItem("studypulse_notes", JSON.stringify(notes));
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
+    }
+
+    function renderNotes() {
+      const list = document.getElementById("notesList");
+      document.getElementById("noteCount").innerText = notes.length;
+      if (notes.length === 0) {
+        list.innerHTML = "<p style='color:#94a3b8; font-size:0.9rem;'>No notes saved yet.</p>";
+        return;
+      }
+      list.innerHTML = notes.map((n, i) => `
+        <div class="note-item">
+          <div>
+            <strong>${escapeHTML(n.q)}</strong>
+            <span style="font-size:0.9rem; color:#cbd5e1;">${escapeHTML(n.a)}</span>
+          </div>
+          <button class="del-btn" onclick="deleteNote(${i})">✕</button>
+        </div>
+      `).join("");
+    }
+
+    function addNote() {
+      const q = document.getElementById("topicInput").value.trim();
+      const a = document.getElementById("answerInput").value.trim();
+      if (!q || !a) return alert("Topic aur Answer dono likhein!");
+      notes.unshift({ q, a });
+      saveToStorage();
+      document.getElementById("topicInput").value = "";
+      document.getElementById("answerInput").value = "";
+      renderNotes();
+    }
+
+    function deleteNote(index) {
+      notes.splice(index, 1);
+      saveToStorage();
+      renderNotes();
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      btn.classList.add("active");
+      if (tabId === "cards") renderCard();
+      if (tabId === "quiz") loadQuiz();
+    }
+
+    // Flashcard Logic
+    function renderCard() {
+      if (notes.length === 0) {
+        document.getElementById("fcLabel").innerText = "Empty";
+        document.getElementById("fcText").innerText = "Pehle kuch notes add karein!";
+        return;
+      }
+      if (cardIndex >= notes.length) cardIndex = 0;
+      isFlipped = false;
+      document.getElementById("fcLabel").innerText = `Question ${cardIndex + 1}/${notes.length} (Tap to Flip)`;
+      document.getElementById("fcText").innerText = notes[cardIndex].q;
+    }
+
+    function flipCard() {
+      if (notes.length === 0) return;
+      isFlipped = !isFlipped;
+      document.getElementById("fcLabel").innerText = isFlipped ? "Answer" : `Question ${cardIndex + 1}/${notes.length}`;
+      document.getElementById("fcText").innerText = isFlipped ? notes[cardIndex].a : notes[cardIndex].q;
+    }
+
+    function nextCard() {
+      if (notes.length === 0) return;
+      cardIndex = (cardIndex + 1) % notes.length;
+      renderCard();
+    }
+
+    function prevCard() {
+      if (notes.length === 0) return;
+      cardIndex = (cardIndex - 1 + notes.length) % notes.length;
+      renderCard();
+    }
+
+    // Auto Quiz Logic
+    function loadQuiz() {
+      const qEl = document.getElementById("quizQuestion");
+      const optEl = document.getElementById("quizOptions");
+      if (notes.length < 2) {
+        qEl.innerText = "Quiz ke liye kam se kam 2 notes add karein!";
+        optEl.innerHTML = "";
+        return;
+      }
+      const correctNote = notes[Math.floor(Math.random() * notes.length)];
+      let options = [correctNote.a];
+      let pool = notes.filter(n => n.a !== correctNote.a).sort(() => 0.5 - Math.random());
+      for (let i = 0; i < Math.min(3, pool.length); i++) options.push(pool[i].a);
+      options.sort(() => 0.5 - Math.random());
+
+      qEl.innerText = "Q: " + correctNote.q;
+      optEl.innerHTML = "";
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "opt-btn";
+        btn.innerText = opt;
+        btn.onclick = () => {
+          document.querySelectorAll(".opt-btn").forEach(b => b.disabled = true);
+          if (opt === correctNote.a) {
+            btn.classList.add("correct");
+            score++;
+          } else {
+            btn.classList.add("wrong");
+            document.querySelectorAll(".opt-btn").forEach(b => {
+              if (b.innerText === correctNote.a) b.classList.add("correct");
+            });
+          }
+          document.getElementById("scoreBar").innerText = "Score: " + score;
+        };
+        optEl.appendChild(btn);
+      });
+    }
+
+    // Online/Offline Status Indicator
+    function updateStatus() {
+      const el = document.getElementById("netStatus");
+      if (navigator.onLine) {
+        el.innerText = "Online";
+        el.classList.remove("offline");
+      } else {
+        el.innerText = "Offline Mode Active";
+        el.classList.add("offline");
+      }
+    }
+    window.addEventListener("online", updateStatus);
+    window.addEventListener("offline", updateStatus);
+    updateStatus();
+
+    // Register Service Worker for Offline PWA
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(err => console.log("SW Error:", err));
+    }
+
+    renderNotes();
+  </script>
+</body>
+        </html>
+        {
+  "name": "StudyPulse Offline Study App",
+  "short_name": "StudyPulse",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+const CACHE_NAME = "studypulse-v1";
+const FILES_TO_CACHE = ["./", "./index.html", "./manifest.json"];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => response || fetch(event.request))
+  );
+});
