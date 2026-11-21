@@ -3,260 +3,238 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your Name – Stories</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<title>Searchly</title>
 <style>
-:root{--bg:#f6f8fb;--surface:#fff;--text:#1c2433;--muted:#5b6679;--accent:#2f4bb8;--line:#dde2ec}
-@media (prefers-color-scheme:dark){:root{--bg:#11151d;--surface:#1a1f2b;--text:#e6e9f1;--muted:#98a2b5;--accent:#8fa0ff;--line:#2a3140}}
+:root{--bg:#fff;--surface:#fff;--text:#202124;--muted:#5f6368;--link:#1a0dab;--accent:#1a73e8;--line:#dfe1e5;--hover:#f1f3f4}
+@media (prefers-color-scheme:dark){:root{--bg:#18191c;--surface:#202225;--text:#e8eaed;--muted:#9aa0a6;--link:#8ab4f8;--accent:#8ab4f8;--line:#3c4043;--hover:#2a2c30}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:19px/1.8 "Noto Serif","Noto Serif Devanagari",Georgia,serif}
-a{color:var(--accent)}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:700px;margin:0 auto;padding:0 20px}
-header{background:var(--surface);border-bottom:1px solid var(--line)}
-header .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:16px;padding-bottom:16px}
-.logo{font-weight:700;font-size:1.3rem;color:var(--text);text-decoration:none}
-nav a{margin-left:18px;color:var(--muted);text-decoration:none;font:.95rem system-ui,sans-serif}
-nav a:hover{color:var(--accent)}
-.intro{padding:52px 0 12px}
-.intro h1{font-size:2.4rem;line-height:1.2;margin:0 0 10px}
-.intro p{color:var(--muted);margin:0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px}
-.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:5px 14px;border-radius:99px;font:.9rem system-ui,sans-serif;cursor:pointer}
-.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
-.item{padding:24px 0;border-bottom:1px solid var(--line)}
-.item h2{font-size:1.45rem;margin:2px 0 6px;line-height:1.35}
-.item h2 a{color:var(--text);text-decoration:none}
-.item h2 a:hover{color:var(--accent)}
-.item p{margin:0;color:var(--muted)}
-.meta{color:var(--muted);font:.85rem system-ui,sans-serif}
-.tag{margin-left:8px;padding:1px 9px;border:1px solid var(--line);border-radius:99px}
-.post,.page{padding:42px 0 60px}
-.post h1,.page h1{font-size:2.2rem;line-height:1.25;margin:0 0 8px}
-.post h2{font-size:1.5rem;margin:2em 0 .4em}
-.post p{margin:1em 0}
-.post blockquote{margin:1.4em 0;padding-left:18px;border-left:3px solid var(--accent);color:var(--muted);font-style:italic}
-.post hr{border:0;border-top:1px solid var(--line);margin:2em 0}
-.back{display:inline-block;margin-bottom:20px;font:.95rem system-ui,sans-serif}
-.hint{color:var(--muted);font:.9rem/1.5 system-ui,sans-serif}
-.field{width:100%;margin:8px 0;padding:10px 12px;font:1rem system-ui,sans-serif;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:6px}
-textarea.field{font:1.05rem/1.7 "Noto Serif","Noto Serif Devanagari",Georgia,serif;min-height:340px;resize:vertical}
-.row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
-.btn{padding:9px 16px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:6px;font:.95rem system-ui,sans-serif;cursor:pointer}
-.btn.alt{background:transparent;color:var(--accent)}
-.draft{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font:.95rem system-ui,sans-serif}
-.draft button{background:none;border:0;color:var(--muted);cursor:pointer}
-footer{padding:30px 0 48px;text-align:center;color:var(--muted);font:.9rem system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--link)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Home */
+.home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 16px 80px}
+.brand{font-size:clamp(2.8rem,12vw,4.6rem);font-weight:700;letter-spacing:-2px;margin:0 0 24px}
+.brand span:nth-child(1){color:#4285f4}.brand span:nth-child(2){color:#ea4335}.brand span:nth-child(3){color:#fbbc05}
+.brand span:nth-child(4){color:#4285f4}.brand span:nth-child(5){color:#34a853}.brand span:nth-child(6){color:#ea4335}
+.brand span:nth-child(7){color:#4285f4}.brand span:nth-child(8){color:#34a853}
+.box{position:relative;width:100%;max-width:600px}
+.bar{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:4px 8px 4px 16px;min-height:48px}
+.bar:hover,.bar:focus-within{box-shadow:0 1px 6px rgba(32,33,36,.28)}
+.bar input{flex:1;border:0;outline:0;background:transparent;min-width:0;padding:8px 4px}
+.icon{border:0;background:none;cursor:pointer;width:38px;height:38px;border-radius:50%;font-size:1.15rem;color:var(--muted)}
+.icon:hover{background:var(--hover)}
+.sugg{position:absolute;left:0;right:0;top:54px;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 12px rgba(32,33,36,.2);overflow:hidden}
+.sugg button{display:block;width:100%;text-align:left;border:0;background:none;padding:10px 20px;cursor:pointer}
+.sugg button:hover,.sugg button.on{background:var(--hover)}
+.actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;justify-content:center}
+.btn{background:var(--hover);border:1px solid var(--hover);border-radius:6px;padding:9px 16px;cursor:pointer}
+.btn:hover{border-color:var(--line)}
+.recent{margin-top:22px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:600px}
+.chip{border:1px solid var(--line);background:none;border-radius:99px;padding:4px 14px;cursor:pointer;color:var(--muted);font-size:.9rem}
+.chip:hover{background:var(--hover)}
+.langrow{margin-top:22px;color:var(--muted);font-size:.9rem}
+select{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+
+/* Results */
+.top{display:flex;align-items:center;gap:16px;padding:14px 20px 0;flex-wrap:wrap}
+.top .brand{font-size:1.7rem;margin:0;letter-spacing:-1px;cursor:pointer}
+.top .box{flex:1;min-width:240px;max-width:640px}
+.tabs{display:flex;gap:4px;padding:0 20px;border-bottom:1px solid var(--line);margin-top:10px;overflow-x:auto}
+.tabs button{border:0;background:none;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button[aria-selected=true]{color:var(--accent);border-bottom-color:var(--accent)}
+.main{max-width:700px;padding:16px 20px 60px;margin-left:0}
+@media (min-width:900px){.main{margin-left:150px}}
+.stat{color:var(--muted);font-size:.85rem;margin-bottom:14px}
+.res{margin:0 0 26px}
+.res .url{color:var(--muted);font-size:.85rem;word-break:break-all}
+.res h3{margin:2px 0 4px;font-size:1.2rem;font-weight:400}
+.res h3 a{text-decoration:none}.res h3 a:hover{text-decoration:underline}
+.res p{margin:0;color:var(--muted)}
+mark{background:none;color:var(--text);font-weight:700}
+.other{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px}
+.other a{margin-right:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.grid a{display:block;background:var(--hover);border-radius:8px;overflow:hidden;aspect-ratio:1;position:relative}
+.grid img{width:100%;height:100%;object-fit:cover;display:block}
+.pager{display:flex;gap:10px;margin-top:10px}
+.msg{color:var(--muted);padding:30px 0}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <a class="logo" href="#home">Your Name</a>
-    <nav><a href="#home">Stories</a><a href="#about">About</a><a href="#write">✎ Write</a></nav>
-  </div>
-</header>
-<main class="wrap" id="app"></main>
-<footer><div class="wrap">© <span id="year"></span> Your Name</div></footer>
+<div id="app"></div>
 
 <script>
-/* ================= YOUR SETTINGS ================= */
-const siteName = "Your Name";
-const categories = ["Short Stories", "Novels", "Kahani", "Poems", "Essays"];
-const aboutText = "Hi, I'm Your Name. I write short stories, novels and kahani. Reach me at you@example.com.";
-
-/* ================= YOUR PUBLISHED WRITING =================
-   Newest first. To publish: write on the ✎ Write page, tap "Get publish code",
-   then paste the block here (keep a comma between blocks).
-   In body you can use: ## Heading, **bold**, *italic*, > quote, - list, ---, [link](url)
-   Novels: use "## Chapter 1" headings inside one post. */
-const posts = [
-  {
-    slug: "the-last-train",
-    title: "The Last Train",
-    category: "Short Stories",
-    date: "2026-11-21",
-    summary: "A woman waits for a train that stopped running years ago.",
-    body: `Meera arrived at the station every evening at six.
-
-The station had no staff, no clock, and no trains. But she came anyway, because her father had once said, *"Some things return only when someone is waiting."*
-
-> Waiting is also a way of loving.
-
-One evening, a distant whistle broke the silence.`
-  },
-  {
-    slug: "ek-chhoti-si-kahani",
-    title: "एक छोटी सी कहानी",
-    category: "Kahani",
-    date: "2026-11-20",
-    summary: "एक पुराने घर और एक नई उम्मीद की कहानी।",
-    body: `गाँव के आख़िरी छोर पर एक पुराना घर था।
-
-कहते थे उस घर में कोई नहीं रहता, पर हर शाम उसकी खिड़की में दीया जलता था।
-
-**एक दिन** एक छोटी लड़की ने हिम्मत करके दरवाज़ा खटखटाया।`
-  },
-  {
-    slug: "river-of-ash",
-    title: "River of Ash",
-    category: "Novels",
-    date: "2026-11-19",
-    summary: "A novel in progress about a village by a dying river.",
-    body: `## Chapter 1
-
-The river had been shrinking for as long as Arjun could remember.
-
-## Chapter 2
-
-By the time the rains came, half the village had already left.`
-  }
-];
-
-/* ================= SITE ENGINE (no need to edit) ================= */
-const app = document.getElementById("app");
-const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const fmt = d => new Date(d + "T00:00:00").toLocaleDateString(undefined, {year:"numeric", month:"long", day:"numeric"});
-const readTime = t => Math.max(1, Math.round(t.trim().split(/\s+/).length / 200)) + " min read";
-let filter = "All";
-
-function md(src) {
-  const inline = t => esc(t)
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
-    .replace(/\*([^*]+)\*/g, "<em>$1</em>");
-  const out = []; let list = false, para = [];
-  const fp = () => { if (para.length) { out.push("<p>" + para.map(inline).join("<br>") + "</p>"); para = []; } };
-  const fl = () => { if (list) { out.push("</ul>"); list = false; } };
-  for (const line of src.split("\n")) {
-    let m;
-    if (!line.trim()) { fp(); fl(); }
-    else if ((m = line.match(/^(#{1,3})\s+(.*)/))) { fp(); fl(); out.push(`<h2>${inline(m[2])}</h2>`); }
-    else if (/^---+$/.test(line.trim())) { fp(); fl(); out.push("<hr>"); }
-    else if ((m = line.match(/^>\s?(.*)/))) { fp(); fl(); out.push(`<blockquote>${inline(m[1])}</blockquote>`); }
-    else if ((m = line.match(/^[-*]\s+(.*)/))) { fp(); if (!list) { out.push("<ul>"); list = true; } out.push(`<li>${inline(m[1])}</li>`); }
-    else { fl(); para.push(line.trim()); }
-  }
-  fp(); fl();
-  return out.join("\n");
-}
-
-function home() {
-  document.title = siteName + " – Stories";
-  const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date));
-  const shown = filter === "All" ? sorted : sorted.filter(p => p.category === filter);
-  app.innerHTML = `
-    <section class="intro"><h1>Stories by ${esc(siteName)}</h1><p>Short stories, novels, kahani and more.</p></section>
-    <div class="chips">${["All", ...categories].map(c =>
-      `<button class="chip" aria-pressed="${c === filter}" data-c="${esc(c)}">${esc(c)}</button>`).join("")}</div>
-    ${shown.map(p => `
-      <article class="item">
-        <div class="meta">${fmt(p.date)} · ${readTime(p.body)}<span class="tag">${esc(p.category)}</span></div>
-        <h2><a href="#post-${esc(p.slug)}">${esc(p.title)}</a></h2>
-        <p>${esc(p.summary || "")}</p>
-      </article>`).join("") || '<p class="hint">Nothing here yet.</p>'}`;
-  app.querySelectorAll(".chip").forEach(b => b.onclick = () => { filter = b.dataset.c; home(); });
-}
-
-function post(slug) {
-  const p = posts.find(x => x.slug === slug);
-  if (!p) return home();
-  document.title = p.title + " – " + siteName;
-  app.innerHTML = `
-    <article class="post">
-      <a class="back" href="#home">← All stories</a>
-      <h1>${esc(p.title)}</h1>
-      <div class="meta">${fmt(p.date)} · ${readTime(p.body)}<span class="tag">${esc(p.category)}</span></div>
-      ${md(p.body)}
-    </article>`;
-}
-
-function about() {
-  document.title = "About – " + siteName;
-  app.innerHTML = `<section class="page"><h1>About</h1><p>${esc(aboutText)}</p></section>`;
-}
-
-/* ---------- Write page (drafts are saved in YOUR browser only) ---------- */
-const store = {
-  get() { try { return JSON.parse(localStorage.getItem("drafts") || "[]"); } catch { return []; } },
-  set(v) { try { localStorage.setItem("drafts", JSON.stringify(v)); return true; } catch { return false; } }
+/* ============ SETTINGS (edit if you like) ============ */
+const NAME = "Searchly";
+const LANGS = { en: "English", hi: "हिन्दी" };
+const ENGINES = {
+  Google:     q => "https://www.google.com/search?q=" + q,
+  Bing:       q => "https://www.bing.com/search?q=" + q,
+  DuckDuckGo: q => "https://duckduckgo.com/?q=" + q
 };
 
-function write(id) {
-  document.title = "Write – " + siteName;
-  const d = store.get().find(x => x.id === id) || { id: null, title: "", cat: categories[0], summary: "", body: "" };
-  app.innerHTML = `
-    <section class="page">
-      <h1>Write</h1>
-      <p class="hint">Your writing saves automatically in this browser. To show it to readers, tap “Get publish code” and paste it into the <b>posts</b> list in index.html on GitHub.</p>
-      <input class="field" id="t" placeholder="Title" value="${esc(d.title)}">
-      <select class="field" id="c">${categories.map(c => `<option ${c === d.cat ? "selected" : ""}>${esc(c)}</option>`).join("")}</select>
-      <input class="field" id="s" placeholder="One-line summary" value="${esc(d.summary)}">
-      <textarea class="field" id="b" placeholder="Start writing your story…">${esc(d.body)}</textarea>
-      <div class="row">
-        <button class="btn alt" id="pv">Preview</button>
-        <button class="btn" id="pub">Get publish code</button>
-        <a class="btn alt" href="#write" style="text-decoration:none">New</a>
-      </div>
-      <div class="hint" id="st"></div>
-      <div id="out"></div>
-      <h2>My drafts</h2>
-      <div id="dl"></div>
-    </section>`;
-  const $ = s => app.querySelector(s);
+/* ============ HELPERS ============ */
+const app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = s => app.querySelector(s);
+const store = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+let lang = store.get("lang", "en");
+const brandHTML = () => [...NAME].map(ch => `<span>${esc(ch)}</span>`).join("");
 
-  const drafts = () => {
-    const all = store.get();
-    $("#dl").innerHTML = all.map(x => `
-      <div class="draft"><a href="#write-${x.id}">${esc(x.title || "Untitled")}</a>
-      <button data-del="${x.id}" aria-label="Delete draft">Delete</button></div>`).join("") || '<p class="hint">No drafts yet.</p>';
-    $("#dl").querySelectorAll("[data-del]").forEach(b => b.onclick = () => {
-      if (confirm("Delete this draft?")) { store.set(store.get().filter(x => x.id !== b.dataset.del)); if (d.id === b.dataset.del) location.hash = "#write"; else drafts(); }
-    });
-  };
-  const save = () => {
-    d.title = $("#t").value; d.cat = $("#c").value; d.summary = $("#s").value; d.body = $("#b").value;
-    if (!d.title && !d.body) return;
-    if (!d.id) d.id = Date.now().toString(36);
-    const all = store.get(), i = all.findIndex(x => x.id === d.id);
-    if (i >= 0) all[i] = d; else all.unshift(d);
-    $("#st").textContent = store.set(all) ? "Saved in this browser" : "Couldn't save. Copy your text somewhere safe.";
-    drafts();
-  };
-  ["#t", "#c", "#s", "#b"].forEach(s => $(s).addEventListener("input", save));
+// Wikipedia snippets contain HTML: keep only the highlighted words, as safe <mark>.
+function cleanSnippet(html) {
+  const marked = html.replace(/<span class="searchmatch">/g, "\u0001").replace(/<\/span>/g, "\u0002").replace(/<[^>]+>/g, "");
+  const text = new DOMParser().parseFromString(marked, "text/html").documentElement.textContent;
+  return esc(text).replace(/\u0001/g, "<mark>").replace(/\u0002/g, "</mark>");
+}
+const api = (host, params) => fetch(`https://${host}/w/api.php?` + new URLSearchParams({ format: "json", origin: "*", ...params })).then(r => { if (!r.ok) throw 0; return r.json(); });
 
-  $("#pv").onclick = () => {
-    $("#out").innerHTML = `<article class="post"><h1>${esc($("#t").value)}</h1>${md($("#b").value)}</article>`;
-  };
-  $("#pub").onclick = () => {
-    save();
-    const title = $("#t").value.trim() || "Untitled";
-    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "story-" + (d.id || Date.now().toString(36));
-    const body = $("#b").value.replace(/\\/g, "\\\\").replace(/`/g, "\\`").replace(/\$\{/g, "\\${");
-    const code = `  {\n    slug: ${JSON.stringify(slug)},\n    title: ${JSON.stringify(title)},\n    category: ${JSON.stringify($("#c").value)},\n    date: "${new Date().toISOString().slice(0, 10)}",\n    summary: ${JSON.stringify($("#s").value)},\n    body: \`${body}\`\n  },`;
-    $("#out").innerHTML = `<p class="hint">Paste this inside the <b>posts</b> list (at the top):</p><textarea class="field" id="code" style="min-height:200px;font:.85rem monospace" readonly>${esc(code)}</textarea><div class="row"><button class="btn" id="cp">Copy code</button></div>`;
-    $("#cp").onclick = async () => {
-      const ta = $("#code"); ta.select();
-      try { await navigator.clipboard.writeText(code); $("#cp").textContent = "Copied"; } catch { document.execCommand("copy"); }
-    };
-  };
-  drafts();
+/* ============ SEARCH BOX (shared by both pages) ============ */
+function searchBox(value) {
+  return `
+    <div class="box">
+      <form class="bar" id="f" role="search" autocomplete="off">
+        <input id="q" type="search" placeholder="Search…" aria-label="Search" value="${esc(value || "")}">
+        <button class="icon" type="button" id="mic" aria-label="Search by voice">🎤</button>
+        <button class="icon" type="submit" aria-label="Search">🔍</button>
+      </form>
+      <div class="sugg" id="sg" hidden></div>
+    </div>`;
 }
 
+function wireBox() {
+  const q = $("#q"), sg = $("#sg");
+  let timer, idx = -1;
+  const go = text => { text = text.trim(); if (text) location.hash = "#s=" + encodeURIComponent(text); };
+  $("#f").onsubmit = e => { e.preventDefault(); go(q.value); };
+
+  q.oninput = () => {
+    clearTimeout(timer); idx = -1;
+    const t = q.value.trim();
+    if (!t) { sg.hidden = true; return; }
+    timer = setTimeout(async () => {
+      try {
+        const r = await api(`${lang}.wikipedia.org`, { action: "opensearch", search: t, limit: 6 });
+        if (q.value.trim() !== t) return;
+        sg.innerHTML = r[1].map(s => `<button type="button">${esc(s)}</button>`).join("");
+        sg.hidden = !r[1].length;
+        sg.querySelectorAll("button").forEach(b => b.onclick = () => go(b.textContent));
+      } catch { sg.hidden = true; }
+    }, 200);
+  };
+  q.onkeydown = e => {
+    const items = [...sg.querySelectorAll("button")];
+    if (sg.hidden || !items.length) return;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      idx = (idx + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+      items.forEach((b, i) => b.classList.toggle("on", i === idx));
+      q.value = items[idx].textContent;
+    } else if (e.key === "Escape") sg.hidden = true;
+  };
+  document.addEventListener("click", e => { if (!e.target.closest(".box")) sg.hidden = true; });
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) $("#mic").hidden = true;
+  else $("#mic").onclick = () => {
+    const r = new SR(); r.lang = lang === "hi" ? "hi-IN" : "en-US";
+    r.onresult = e => go(e.results[0][0].transcript);
+    try { r.start(); } catch {}
+  };
+}
+
+/* ============ HOME PAGE ============ */
+function home() {
+  document.title = NAME;
+  const recent = store.get("recent", []);
+  app.innerHTML = `
+    <div class="home">
+      <h1 class="brand" aria-label="${esc(NAME)}">${brandHTML()}</h1>
+      ${searchBox("")}
+      <div class="actions"><button class="btn" id="go">Search</button><button class="btn" id="lucky">I'm feeling lucky</button></div>
+      ${recent.length ? `<div class="recent">${recent.map(r => `<button class="chip">${esc(r)}</button>`).join("")}</div>` : ""}
+      <div class="langrow">Language: <select id="lg" aria-label="Language">${Object.entries(LANGS).map(([k, v]) => `<option value="${k}" ${k === lang ? "selected" : ""}>${v}</option>`).join("")}</select></div>
+    </div>`;
+  wireBox();
+  $("#q").focus();
+  $("#go").onclick = () => $("#f").requestSubmit();
+  $("#lucky").onclick = async () => {
+    const t = $("#q").value.trim(); if (!t) return;
+    try {
+      const r = await api(`${lang}.wikipedia.org`, { action: "opensearch", search: t, limit: 1 });
+      if (r[3][0]) return location.href = r[3][0];
+    } catch {}
+    $("#f").requestSubmit();
+  };
+  app.querySelectorAll(".chip").forEach(c => c.onclick = () => location.hash = "#s=" + encodeURIComponent(c.textContent));
+  $("#lg").onchange = e => { lang = e.target.value; store.set("lang", lang); };
+}
+
+/* ============ RESULTS PAGE ============ */
+async function results(query, tab = "web", offset = 0) {
+  document.title = query + " – " + NAME;
+  const enc = encodeURIComponent(query);
+  const recent = [query, ...store.get("recent", []).filter(x => x !== query)].slice(0, 8);
+  store.set("recent", recent);
+
+  app.innerHTML = `
+    <div class="top"><h1 class="brand" id="logo" aria-label="${esc(NAME)}">${brandHTML()}</h1>${searchBox(query)}</div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="${tab === "web"}" data-t="web">All</button>
+      <button role="tab" aria-selected="${tab === "images"}" data-t="images">Images</button>
+    </div>
+    <div class="main" id="mn"><p class="msg">Searching…</p></div>`;
+  wireBox();
+  $("#logo").onclick = () => location.hash = "";
+  app.querySelectorAll(".tabs button").forEach(b => b.onclick = () => results(query, b.dataset.t, 0));
+  const mn = $("#mn");
+
+  const other = `<div class="other">Search “${esc(query)}” on: ${Object.entries(ENGINES).map(([n, f]) => `<a href="${f(enc)}" target="_blank" rel="noopener">${n}</a>`).join("")}</div>`;
+
+  try {
+    if (tab === "web") {
+      const r = await api(`${lang}.wikipedia.org`, { action: "query", list: "search", srsearch: query, srlimit: 10, sroffset: offset });
+      const list = r.query.search, total = r.query.searchinfo.totalhits;
+      if (!list.length) { mn.innerHTML = `<p class="msg">No results for “${esc(query)}”.</p>${other}`; return; }
+      mn.innerHTML = `
+        <div class="stat">About ${total.toLocaleString()} results (${LANGS[lang]} Wikipedia)</div>
+        ${list.map(x => {
+          const url = `https://${lang}.wikipedia.org/wiki/${encodeURIComponent(x.title.replace(/ /g, "_"))}`;
+          return `<div class="res"><div class="url">${esc(url)}</div><h3><a href="${url}" target="_blank" rel="noopener">${esc(x.title)}</a></h3><p>${cleanSnippet(x.snippet)}…</p></div>`;
+        }).join("")}
+        <div class="pager">
+          ${offset > 0 ? `<button class="btn" id="pv">← Previous</button>` : ""}
+          ${r.continue ? `<button class="btn" id="nx">Next →</button>` : ""}
+        </div>${other}`;
+      const pv = $("#pv"), nx = $("#nx");
+      if (pv) pv.onclick = () => { results(query, "web", Math.max(0, offset - 10)); window.scrollTo(0, 0); };
+      if (nx) nx.onclick = () => { results(query, "web", offset + 10); window.scrollTo(0, 0); };
+    } else {
+      const r = await api("commons.wikimedia.org", { action: "query", generator: "search", gsrnamespace: 6, gsrsearch: query, gsrlimit: 30, prop: "imageinfo", iiprop: "url", iiurlwidth: 300 });
+      const pages = Object.values(r.query?.pages || {}).filter(p => p.imageinfo?.[0]?.thumburl);
+      mn.innerHTML = pages.length
+        ? `<div class="grid">${pages.map(p => `<a href="${esc(p.imageinfo[0].descriptionurl)}" target="_blank" rel="noopener" title="${esc(p.title.replace(/^File:/, ""))}"><img loading="lazy" src="${esc(p.imageinfo[0].thumburl)}" alt="${esc(p.title.replace(/^File:/, ""))}"></a>`).join("")}</div>${other}`
+        : `<p class="msg">No images found for “${esc(query)}”.</p>${other}`;
+    }
+  } catch {
+    mn.innerHTML = `<p class="msg">Couldn't load results. Check your internet connection and try again.</p>${other}`;
+  }
+}
+
+/* ============ ROUTER ============ */
 function route() {
-  const h = location.hash.slice(1);
-  if (h.startsWith("post-")) post(h.slice(5));
-  else if (h.startsWith("write")) write(h.slice(6));
-  else if (h === "about") about();
+  const m = location.hash.match(/^#s=(.*)$/);
+  if (m) results(decodeURIComponent(m[1]));
   else home();
   window.scrollTo(0, 0);
 }
-
-document.getElementById("year").textContent = new Date().getFullYear();
 window.addEventListener("hashchange", route);
 route();
 </script>
 </body>
-                              </html>
+  </html>
