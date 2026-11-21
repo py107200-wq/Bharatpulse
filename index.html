@@ -1,286 +1,455 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StudyPulse - Offline Smart Study App</title>
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="manifest" href="manifest.json" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>भारत खोज | BharatKhoj Search Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background: #0f172a; color: #f8fafc; min-height: 100vh; padding: 16px; }
-    .container { max-width: 600px; margin: 0 auto; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    h1 { font-size: 1.4rem; color: #38bdf8; }
-    .status { font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; background: #1e293b; color: #4ade80; }
-    .status.offline { color: #facc15; }
+    :root {
+      --primary: #ff6f00;      /* भारतीय केसरिया टोन */
+      --secondary: #138808;    /* भारतीय हरा टोन */
+      --navy: #0d233a;         /* अशोक चक्र नेवी */
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+    }
 
-    .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
-    .tab-btn { flex: 1; padding: 10px; border: none; border-radius: 10px; background: #1e293b; color: #94a3b8; font-weight: 600; cursor: pointer; }
-    .tab-btn.active { background: #38bdf8; color: #0f172a; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+    }
 
-    .section { display: none; }
-    .section.active { display: block; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-    .card-box { background: #1e293b; padding: 16px; border-radius: 14px; margin-bottom: 14px; }
-    input, textarea { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #334155; border-radius: 10px; background: #0f172a; color: #fff; font-size: 0.95rem; }
-    .btn { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #38bdf8; color: #0f172a; font-weight: 700; cursor: pointer; font-size: 0.95rem; }
-    .btn-secondary { background: #334155; color: #f8fafc; margin-top: 8px; }
+    /* हेडर */
+    header {
+      padding: 1.5rem 1rem 0.5rem;
+      text-align: center;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
 
-    .note-item { background: #0f172a; padding: 12px; border-radius: 10px; margin-top: 10px; border-left: 4px solid #38bdf8; display: flex; justify-content: space-between; align-items: start; gap: 10px; }
-    .note-item strong { color: #38bdf8; display: block; margin-bottom: 4px; }
-    .del-btn { background: #ef4444; color: #fff; border: none; padding: 5px 9px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+    .brand-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
 
-    /* Flashcard */
-    .flashcard { background: #1e293b; min-height: 200px; border-radius: 16px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 24px; cursor: pointer; border: 2px solid #38bdf8; transition: transform 0.2s; }
-    .flashcard:active { transform: scale(0.98); }
-    .fc-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; margin-bottom: 10px; }
-    .fc-text { font-size: 1.25rem; font-weight: 600; line-height: 1.5; }
-    .fc-controls { display: flex; gap: 10px; margin-top: 14px; }
+    .brand-title span.saffron { color: var(--primary); }
+    .brand-title span.green { color: var(--secondary); }
 
-    /* Quiz */
-    .quiz-q { font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; color: #38bdf8; }
-    .opt-btn { width: 100%; text-align: left; padding: 12px; margin-bottom: 8px; border: 1px solid #334155; border-radius: 10px; background: #0f172a; color: #f8fafc; cursor: pointer; font-size: 0.95rem; }
-    .opt-btn.correct { background: #166534; border-color: #4ade80; }
-    .opt-btn.wrong { background: #7f1d1d; border-color: #f87171; }
-    .score-bar { text-align: center; font-weight: 700; margin-bottom: 12px; color: #facc15; }
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* सर्च बार कंटेनर */
+    .search-wrapper {
+      max-width: 680px;
+      margin: 1.5rem auto 1rem;
+      padding: 0 1rem;
+      width: 100%;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 9999px;
+      padding: 6px 14px 6px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 6px 16px rgba(255, 111, 0, 0.15);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      padding: 8px 0;
+      background: transparent;
+    }
+
+    .search-box button {
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.2s;
+    }
+
+    .search-box button:hover {
+      background: var(--primary);
+    }
+
+    /* फ़िल्टर टैग्स */
+    .filter-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0.5rem 0 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .pill {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.15s;
+    }
+
+    .pill.active, .pill:hover {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    /* रिज़ल्ट सेक्शन */
+    main {
+      flex: 1;
+      max-width: 780px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .stats-bar {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .result-card {
+      background: var(--card-bg);
+      padding: 1.1rem 1.25rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .result-card:hover {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      border-color: #cbd5e1;
+    }
+
+    .result-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+    }
+
+    .result-badge {
+      background: #f1f5f9;
+      color: #475569;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+
+    .result-badge.gov { background: #e0f2fe; color: #0369a1; }
+    .result-badge.edu { background: #fef3c7; color: #b45309; }
+
+    .result-url {
+      color: var(--secondary);
+      font-weight: 500;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .result-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .result-title a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .result-title a:hover {
+      text-decoration: underline;
+    }
+
+    .result-snippet {
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    /* खाली स्थिति या लोडर */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+
+    .loader {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>⚡ StudyPulse</h1>
-      <span id="netStatus" class="status">Online</span>
-    </header>
 
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('notes', this)">📝 Notes</button>
-      <button class="tab-btn" onclick="switchTab('cards', this)">🃏 Flashcards</button>
-      <button class="tab-btn" onclick="switchTab('quiz', this)">🎯 Quiz</button>
+  <header>
+    <div class="brand-title">
+      <span class="saffron">भारत</span><span class="green">खोज</span>
     </div>
+    <div class="tagline">स्वतंत्र, निष्पक्ष और भारत-केंद्रित सर्च इंजन</div>
 
-    <!-- NOTES SECTION -->
-    <div id="notes" class="section active">
-      <div class="card-box">
-        <input type="text" id="topicInput" placeholder="Topic / Question (e.g., Article 21)" />
-        <textarea id="answerInput" rows="3" placeholder="Short Answer / Definition..."></textarea>
-        <button class="btn" onclick="addNote()">+ Save Note Offline</button>
-      </div>
-      <div class="card-box">
-        <h3 style="margin-bottom:8px; font-size:1rem;">Saved Notes (<span id="noteCount">0</span>)</h3>
-        <div id="notesList"></div>
+    <div class="search-wrapper">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="खोजें: सरकारी योजनाएं, एग्ज़ाम, यूनिवर्सिटी, समाचार..." autofocus>
+        <button onclick="handleSearch()">खोजें</button>
       </div>
     </div>
 
-    <!-- FLASHCARDS SECTION -->
-    <div id="cards" class="section">
-      <div class="flashcard" onclick="flipCard()">
-        <div class="fc-label" id="fcLabel">Question (Tap to Flip)</div>
-        <div class="fc-text" id="fcText">Add notes first!</div>
-      </div>
-      <div class="fc-controls">
-        <button class="btn btn-secondary" onclick="prevCard()">⬅ Prev</button>
-        <button class="btn" onclick="nextCard()">Next ➡</button>
-      </div>
+    <!-- त्वरित विषय फ़िल्टर -->
+    <div class="filter-pills">
+      <button class="pill active" onclick="setCategory('all', this)">सभी (All)</button>
+      <button class="pill" onclick="setCategory('education', this)">शिक्षा व एग्ज़ाम</button>
+      <button class="pill" onclick="setCategory('yojana', this)">सरकारी योजनाएं</button>
+      <button class="pill" onclick="setCategory('jobs', this)">भर्ती व परिणाम</button>
+      <button class="pill" onclick="setCategory('news', this)">समाचार</button>
     </div>
+  </header>
 
-    <!-- QUIZ SECTION -->
-    <div id="quiz" class="section">
-      <div class="card-box">
-        <div class="score-bar" id="scoreBar">Score: 0</div>
-        <div class="quiz-q" id="quizQuestion">Need at least 2 notes for Quiz!</div>
-        <div id="quizOptions"></div>
-        <button class="btn btn-secondary" onclick="loadQuiz()">Next Question ➡</button>
-      </div>
-    </div>
-  </div>
+  <main>
+    <div class="stats-bar" id="statsBar">लोकप्रिय भारतीय पोर्टल खोज के लिए तैयार हैं</div>
+    <div class="loader" id="loader">परिणाम खोजे जा रहे हैं...</div>
+    <div class="results-list" id="resultsList"></div>
+  </main>
+
+  <footer>
+    🇮🇳 भारत के लिए निर्मित • डेटा प्राइवेसी एवं ज़ीरो-ट्रैकिंग युक्त
+  </footer>
 
   <script>
-    // Default sample notes on first visit
-    const defaultNotes = [
-      { q: "HTTP Full Form", a: "HyperText Transfer Protocol" },
-      { q: "Father of C Language", a: "Dennis Ritchie" },
-      { q: "Article 21 of Indian Constitution", a: "Protection of Life and Personal Liberty" },
-      { q: "RAM vs ROM", a: "RAM is volatile temporary memory; ROM is permanent memory." }
+    // 1. स्थानीय भारतीय ज्ञानकोष (Curated Regional Index)
+    const bharatDatabase = [
+      {
+        title: "UPSC Official Portal - संघ लोक सेवा आयोग",
+        url: "https://upsc.gov.in",
+        category: "education",
+        tags: ["upsc", "ias", "ips", "capf", "cds", "civil services", "exam", "admit card"],
+        snippet: "संघ लोक सेवा आयोग (UPSC) की आधिकारिक वेबसाइट। IAS, IPS, CAPF, CDS भर्ती परीक्षाओं के नोटिफिकेशन, एडमिट कार्ड और परीक्षा परिणाम।"
+      },
+      {
+        title: "National Scholarship Portal (NSP) - छात्रवृत्ति पोर्टल",
+        url: "https://scholarships.gov.in",
+        category: "yojana",
+        tags: ["scholarship", "nsp", "chatravriti", "student", "yojana", "bca", "ba", "college"],
+        snippet: "भारत सरकार का केंद्रीय छात्रवृत्ति पोर्टल। प्री-मैट्रिक, पोस्ट-मैट्रिक और उच्च शिक्षा प्राप्त कर रहे सभी वर्गों के छात्रों के लिए वित्तीय सहायता योजनाएं।"
+      },
+      {
+        title: "UP Digital Library & MGKVP University Updates",
+        url: "https://mgkvp.ac.in",
+        category: "education",
+        tags: ["mgkvp", "varanasi", "kashi vidyapith", "bca", "ba", "exam form", "syllabus", "results"],
+        snippet: "महात्मा गांधी काशी विद्यापीठ (MGKVP) वाराणसी। सम्बद्ध महाविद्यालयों के लिए परीक्षा फॉर्म, सेमेस्टर टाइम-टेबल, रिजल्ट और पाठ्यक्रम विवरण।"
+      },
+      {
+        title: "PM Kisan Samman Nidhi - पीएम किसान योजना",
+        url: "https://pmkisan.gov.in",
+        category: "yojana",
+        tags: ["pm kisan", "kisan", "yojana", "farmer", "kheti", "installment", "status"],
+        snippet: "पात्र किसान परिवारों को प्रति वर्ष ₹6,000 की वित्तीय सहायता। ई-केवाईसी (e-KYC), लाभार्थी स्थिति और नए किसान पंजीकरण की सीधी जानकारी।"
+      },
+      {
+        title: "UPSSSC Portal - उत्तर प्रदेश अधीनस्थ सेवा चयन आयोग",
+        url: "http://upsssc.gov.in",
+        category: "jobs",
+        tags: ["upsssc", "pet", "lekhpal", "vdo", "up exam", "result", "jobs", "sarkari"],
+        snippet: "उत्तर प्रदेश राज्य स्तरीय ग्रुप सी एवं अन्य भर्ती परीक्षाएं: PET पात्रता परीक्षा, लेखपाल, ग्राम विकास अधिकारी परिणाम और कट-ऑफ।"
+      },
+      {
+        title: "Samarth eGov Student Portal",
+        url: "https://samarth.edu.in",
+        category: "education",
+        tags: ["samarth", "student portal", "enrollment", "mgkvp samarth", "admit card", "results"],
+        snippet: "भारतीय विश्वविद्यालयों और कॉलेजों के लिए उच्च शिक्षा प्रबंधन प्रणाली। छात्र नामांकन, आंतरिक अंक और परीक्षा विवरण की एकीकृत सुविधा।"
+      },
+      {
+        title: "DD News India - निष्पक्ष राष्ट्रीय समाचार",
+        url: "https://ddnews.gov.in",
+        category: "news",
+        tags: ["news", "samachar", "india", "khabar", "current affairs", "upsc current affairs"],
+        snippet: "दूरदर्शन का आधिकारिक राष्ट्रीय न्यूज़ पोर्टल। राष्ट्रीय, अंतर्राष्ट्रीय, खेल, आर्थिक और विज्ञान संबंधी प्रामाणिक व तथ्यात्मक समाचार।"
+      }
     ];
 
-    let notes = JSON.parse(localStorage.getItem("studypulse_notes")) || defaultNotes;
-    let cardIndex = 0;
-    let isFlipped = false;
-    let score = 0;
+    let currentCategory = 'all';
 
-    function saveToStorage() {
-      localStorage.setItem("studypulse_notes", JSON.stringify(notes));
+    // इनपुट एंटर की दबाने पर खोज
+    document.getElementById('searchInput').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') handleSearch();
+    });
+
+    function setCategory(cat, el) {
+      currentCategory = cat;
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      handleSearch();
     }
 
-    function escapeHTML(str) {
-      return str.replace(/[&<>"']/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m]));
-    }
+    async function handleSearch() {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const resultsContainer = document.getElementById('resultsList');
+      const statsBar = document.getElementById('statsBar');
+      const loader = document.getElementById('loader');
 
-    function renderNotes() {
-      const list = document.getElementById("notesList");
-      document.getElementById("noteCount").innerText = notes.length;
-      if (notes.length === 0) {
-        list.innerHTML = "<p style='color:#94a3b8; font-size:0.9rem;'>No notes saved yet.</p>";
-        return;
-      }
-      list.innerHTML = notes.map((n, i) => `
-        <div class="note-item">
-          <div>
-            <strong>${escapeHTML(n.q)}</strong>
-            <span style="font-size:0.9rem; color:#cbd5e1;">${escapeHTML(n.a)}</span>
-          </div>
-          <button class="del-btn" onclick="deleteNote(${i})">✕</button>
-        </div>
-      `).join("");
-    }
+      resultsContainer.innerHTML = '';
+      loader.style.display = 'block';
 
-    function addNote() {
-      const q = document.getElementById("topicInput").value.trim();
-      const a = document.getElementById("answerInput").value.trim();
-      if (!q || !a) return alert("Topic aur Answer dono likhein!");
-      notes.unshift({ q, a });
-      saveToStorage();
-      document.getElementById("topicInput").value = "";
-      document.getElementById("answerInput").value = "";
-      renderNotes();
-    }
+      // 1. स्थानीय भारतीय डेटाबेस में सर्च (हिंग्लिश + हिंदी मैचिंग)
+      let localMatches = bharatDatabase.filter(item => {
+        const matchesCategory = (currentCategory === 'all' || item.category === currentCategory);
+        if (!matchesCategory) return false;
 
-    function deleteNote(index) {
-      notes.splice(index, 1);
-      saveToStorage();
-      renderNotes();
-    }
+        if (!query) return true; // खाली रहने पर श्रेणी अनुसार सूची दिखाएं
 
-    function switchTab(tabId, btn) {
-      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-      document.getElementById(tabId).classList.add("active");
-      btn.classList.add("active");
-      if (tabId === "cards") renderCard();
-      if (tabId === "quiz") loadQuiz();
-    }
+        const inTitle = item.title.toLowerCase().includes(query);
+        const inSnippet = item.snippet.toLowerCase().includes(query);
+        const inTags = item.tags.some(tag => tag.toLowerCase().includes(query) || query.includes(tag));
 
-    // Flashcard Logic
-    function renderCard() {
-      if (notes.length === 0) {
-        document.getElementById("fcLabel").innerText = "Empty";
-        document.getElementById("fcText").innerText = "Pehle kuch notes add karein!";
-        return;
-      }
-      if (cardIndex >= notes.length) cardIndex = 0;
-      isFlipped = false;
-      document.getElementById("fcLabel").innerText = `Question ${cardIndex + 1}/${notes.length} (Tap to Flip)`;
-      document.getElementById("fcText").innerText = notes[cardIndex].q;
-    }
+        return inTitle || inSnippet || inTags;
+      });
 
-    function flipCard() {
-      if (notes.length === 0) return;
-      isFlipped = !isFlipped;
-      document.getElementById("fcLabel").innerText = isFlipped ? "Answer" : `Question ${cardIndex + 1}/${notes.length}`;
-      document.getElementById("fcText").innerText = isFlipped ? notes[cardIndex].a : notes[cardIndex].q;
-    }
+      // 2. लाइव ओपन वेब API (DuckDuckGo JSON API) से बैकअप सर्च
+      let externalResults = [];
+      if (query.length > 2) {
+        try {
+          const response = await fetch(`https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_html=1&skip_disambig=1`);
+          const data = await response.json();
 
-    function nextCard() {
-      if (notes.length === 0) return;
-      cardIndex = (cardIndex + 1) % notes.length;
-      renderCard();
-    }
-
-    function prevCard() {
-      if (notes.length === 0) return;
-      cardIndex = (cardIndex - 1 + notes.length) % notes.length;
-      renderCard();
-    }
-
-    // Auto Quiz Logic
-    function loadQuiz() {
-      const qEl = document.getElementById("quizQuestion");
-      const optEl = document.getElementById("quizOptions");
-      if (notes.length < 2) {
-        qEl.innerText = "Quiz ke liye kam se kam 2 notes add karein!";
-        optEl.innerHTML = "";
-        return;
-      }
-      const correctNote = notes[Math.floor(Math.random() * notes.length)];
-      let options = [correctNote.a];
-      let pool = notes.filter(n => n.a !== correctNote.a).sort(() => 0.5 - Math.random());
-      for (let i = 0; i < Math.min(3, pool.length); i++) options.push(pool[i].a);
-      options.sort(() => 0.5 - Math.random());
-
-      qEl.innerText = "Q: " + correctNote.q;
-      optEl.innerHTML = "";
-      options.forEach(opt => {
-        const btn = document.createElement("button");
-        btn.className = "opt-btn";
-        btn.innerText = opt;
-        btn.onclick = () => {
-          document.querySelectorAll(".opt-btn").forEach(b => b.disabled = true);
-          if (opt === correctNote.a) {
-            btn.classList.add("correct");
-            score++;
-          } else {
-            btn.classList.add("wrong");
-            document.querySelectorAll(".opt-btn").forEach(b => {
-              if (b.innerText === correctNote.a) b.classList.add("correct");
+          // मुख्य Instant Answer
+          if (data.AbstractText && data.AbstractURL) {
+            externalResults.push({
+              title: data.Heading || query,
+              url: data.AbstractURL,
+              category: "web",
+              snippet: data.AbstractText
             });
           }
-          document.getElementById("scoreBar").innerText = "Score: " + score;
-        };
-        optEl.appendChild(btn);
+
+          // संबंधित विषय
+          if (data.RelatedTopics && data.RelatedTopics.length > 0) {
+            data.RelatedTopics.slice(0, 4).forEach(topic => {
+              if (topic.Text && topic.FirstURL) {
+                externalResults.push({
+                  title: topic.Text.split(' - ')[0] || topic.Text.substring(0, 40),
+                  url: topic.FirstURL,
+                  category: "web",
+                  snippet: topic.Text
+                });
+              }
+            });
+          }
+        } catch (err) {
+          console.warn("External live search unavailable, falling back to local index.");
+        }
+      }
+
+      loader.style.display = 'none';
+
+      // दोनों परिणामों को मिलाना
+      const combined = [...localMatches, ...externalResults];
+
+      if (combined.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="empty-state">
+            <h3>कोई परिणाम नहीं मिला</h3>
+            <p style="margin-top: 8px;">कृपया अन्य शब्दों का उपयोग करें (उदा. 'UPSC', 'Scholarship', 'Kisan', 'Exam')</p>
+          </div>
+        `;
+        statsBar.innerText = "0 परिणाम";
+        return;
+      }
+
+      statsBar.innerText = `लगभग ${combined.length} प्रामाणिक परिणाम मिले`;
+
+      combined.forEach(res => {
+        const badgeClass = res.category === 'yojana' || res.category === 'jobs' ? 'gov' : (res.category === 'education' ? 'edu' : '');
+        const badgeLabel = res.category === 'yojana' ? 'योजना' : (res.category === 'education' ? 'शिक्षा' : (res.category === 'jobs' ? 'भर्ती' : (res.category === 'news' ? 'न्यूज़' : 'वेब')));
+
+        resultsContainer.innerHTML += `
+          <div class="result-card">
+            <div class="result-meta">
+              <span class="result-badge ${badgeClass}">${badgeLabel}</span>
+              <span class="result-url">${res.url}</span>
+            </div>
+            <div class="result-title">
+              <a href="${res.url}" target="_blank" rel="noopener noreferrer">${res.title}</a>
+            </div>
+            <div class="result-snippet">${res.snippet}</div>
+          </div>
+        `;
       });
     }
 
-    // Online/Offline Status Indicator
-    function updateStatus() {
-      const el = document.getElementById("netStatus");
-      if (navigator.onLine) {
-        el.innerText = "Online";
-        el.classList.remove("offline");
-      } else {
-        el.innerText = "Offline Mode Active";
-        el.classList.add("offline");
-      }
-    }
-    window.addEventListener("online", updateStatus);
-    window.addEventListener("offline", updateStatus);
-    updateStatus();
-
-    // Register Service Worker for Offline PWA
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js").catch(err => console.log("SW Error:", err));
-    }
-
-    renderNotes();
+    // शुरुआती लोड पर डिफ़ॉल्ट उपयोगी लिंक्स दिखाना
+    window.onload = () => handleSearch();
   </script>
 </body>
-        </html>
-        {
-  "name": "StudyPulse Offline Study App",
-  "short_name": "StudyPulse",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/2232/2232688.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
-}
-const CACHE_NAME = "studypulse-v1";
-const FILES_TO_CACHE = ["./", "./index.html", "./manifest.json"];
-
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
-  );
-});
-
-self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => response || fetch(event.request))
-  );
-});
+  </html>
